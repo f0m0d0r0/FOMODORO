@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "FOMODORO",
+    "slug": "FOMODORO",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "FOMODORO"
+}
