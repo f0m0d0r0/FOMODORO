@@ -20,7 +20,7 @@ export default class CheckInComponent extends React.Component {
                 {this.props.userInfo.checkedInStation != null
                     &&
                     <View style={styles.timer}>
-                        <Text style={styles.title}>You are checked in to{this.props.checkInStation.description}</Text>
+                        <Text style={styles.title}>You are checked in to {this.props.checkInStation.description}</Text>
                         <Timer />
                         <TouchableOpacity
                         style={styles.button}
@@ -66,5 +66,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#CCCCCC',
         padding: 10,
         width: '50%',
+        marginTop: 20
     },
 });

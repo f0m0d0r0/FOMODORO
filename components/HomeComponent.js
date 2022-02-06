@@ -6,6 +6,7 @@ import SignUpComponent from "./SignUpComponent";
 import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import app from "../firebaseConfig";
 import { LogBox } from 'react-native';
+import { updatePoints, registerUser, findUser } from "../services/UserServices";
 
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
