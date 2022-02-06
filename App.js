@@ -1,11 +1,13 @@
 import * as React from 'react';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import HomeComponent from "./components/HomeComponent";
+import { MenuProvider } from "react-native-popup-menu";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} showsUserLocation={true} provider={PROVIDER_GOOGLE}/>
+        <HomeComponent/>
     </View>
   );
 }
@@ -16,9 +18,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-  },
+  }
 });
