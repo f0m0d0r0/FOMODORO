@@ -1,28 +1,16 @@
-import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { Text } from 'react-native'
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 
-export default class TimerComponent extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            timer: 0,
-            timerPaused: true
-        };
-    }
+export default function Timer() {
+    return(
+        <CountdownCircleTimer
+            isPlaying
+            duration={7}
+            colors={['#004777', '#F7B801', '#A30000', '#A30000']}
+            colorsTime={[7, 5, 2, 0]}
+        >
+            {({ remainingTime }) => <Text>{remainingTime}</Text>}
+        </CountdownCircleTimer>
 
-    componentDidMount() {
-        this.setState({timerPaused: false});
-    }
-
-    render() {
-        return (
-            <View>
-
-            </View>
-        )
-    }
+    )
 }
-
-const styles = StyleSheet.create({
-
-});

@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, Alert, TouchableOpacity} from 'react-native';
-
+import Timer from './TimerComponent';
 export default class CheckInComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -19,8 +19,9 @@ export default class CheckInComponent extends React.Component {
             <View style={styles.container}>
                 {this.props.userInfo.checkedInStation != null
                     &&
-                    <View>
+                    <View style={styles.timer}>
                         <Text style={styles.title}>You are checked in to{this.props.checkInStation.description}</Text>
+                        <Timer />
                         <TouchableOpacity
                         style={styles.button}
                         onPress={this.onPressCheckout}>
@@ -53,6 +54,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: 'white',
         margin: 30
+    },
+    timer: {
+        alignSelf: 'center',
+        alignItems: 'center',
+        color: 'white',
     },
     button: {
         alignSelf: 'center',
