@@ -4,7 +4,7 @@ import { StyleSheet, Image, Text, View, Dimensions } from 'react-native';
 import * as Location from "expo-location";
 import Spots from "./Spots";
 
-export default function MapComponent() {
+export default function MapComponent(props) {
   const [camView, setCamView] = useState({
     center: {
       longitude: -118.286144,
@@ -58,7 +58,6 @@ export default function MapComponent() {
             pitch: camView.pitch,
             heading: camView.heading,
             altitude: camView.altitude,
-            heading: camView.heading,
             zoom:19
           })
         })
@@ -90,12 +89,10 @@ export default function MapComponent() {
         latitude: camView.center.latitude,
         longitude: camView.center.longitude,
         }}
-        description={"This is a marker in React Native"}
-      >
+        description={"This is a marker in React Native"}>
         <Image source={require('../assets/spot.png')} style={{height: 35, width:35 }} />
-
       </Marker>
-      <Spots />
+      <Spots onClickStation={props.onClickStation}/>
   </MapView>
   );
 }

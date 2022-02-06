@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
-import * as Google from "expo-google-app-auth";
 
 export default class LoginComponent extends React.Component {
     constructor(props) {
@@ -22,7 +21,9 @@ export default class LoginComponent extends React.Component {
 
     onLogIn = () => {
         if (this.state.email != null && this.state.password != null) {
+            this.setState({isSigninInProgress: true});
             this.props.signIn(this.state.email, this.state.password);
+            this.setState({isSigninInProgress: false});
         }
         else {
             Alert.alert(
@@ -44,12 +45,14 @@ export default class LoginComponent extends React.Component {
             <View style={styles.container}>
                 <Text style={styles.title}>Login</Text>
                 <TextInput
+                    autoCorrect={false}
                     style={styles.input}
                     onChangeText={this.onChangeEmail}
                     value={this.state.email}
                     placeholder="Email"
                 />
                 <TextInput
+                    secureTextEntry={true}
                     style={styles.input}
                     onChangeText={this.onChangePassword}
                     value={this.state.password}

@@ -26,9 +26,17 @@ export default class SignUpComponent extends React.Component {
 
     onSignUp = () => {
         if (this.state.email != null && this.state.password != null && this.state.confirmPassword != null) {
-            this.setState({isSigninInProgress: true});
-            this.props.signUp(this.state.email, this.state.password);
-            this.setState({isSigninInProgress: false});
+            if (this.state.password != this.state.confirmPassword) {
+                Alert.alert("Password is not the same")
+            }
+            else {
+                this.setState({isSigninInProgress: true});
+                this.props.signUp(this.state.email, this.state.password);
+                this.setState({isSigninInProgress: false});
+            }
+            this.setState({
+                password: null,
+                confirmPassword: null})
         }
         else {
             Alert.alert(
@@ -41,23 +49,30 @@ export default class SignUpComponent extends React.Component {
         }
     }
 
+    onLogIn = () => {
+        this.props.changePage("logIn")
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>Sign Up</Text>
                 <TextInput
+                    autoCorrect={false}
                     style={styles.input}
                     onChangeText={this.onChangeEmail}
                     value={this.state.email}
                     placeholder="Email"
                 />
                 <TextInput
+                    secureTextEntry={true}
                     style={styles.input}
                     onChangeText={this.onChangePassword}
                     value={this.state.password}
                     placeholder="Password"
                 />
                 <TextInput
+                    secureTextEntry={true}
                     style={styles.input}
                     onChangeText={this.onChangeConfirmPassword}
                     value={this.state.confirmPassword}
@@ -68,6 +83,11 @@ export default class SignUpComponent extends React.Component {
                     onPress={this.onSignUp}
                     disabled={this.state.isSigninInProgress}>
                     <Text> Sign Up </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={this.onLogIn}>
+                    <Text> Log In </Text>
                 </TouchableOpacity>
             </View>
         )

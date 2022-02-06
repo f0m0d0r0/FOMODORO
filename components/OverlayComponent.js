@@ -3,29 +3,46 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'reac
 import { AntDesign } from '@expo/vector-icons';
 import MapComponent from "./MapComponent";
 import ProfileComponent from "./ProfileComponent";
-import { MenuProvider } from "react-native-popup-menu";
+import { getAuth, signOut } from "firebase/auth";
+import CheckInComponent from "./CheckInComponent";
+
 export default class OverlayComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: false
+            open: false,
+            checkInStation: null
         };
     }
 
     onOpenMenu = () => {
-        this.setState({open: !this.state.open})
+        this.setState({
+            open: !this.state.open,
+            checkInStation: null
+        })
     }
 
     onPress = () => {
-        this.props.changePage("start");
+        signOut(getAuth()).then(() => {
+            // Sign-out successful.
+            this.props.changePage("start");
+        }).catch((error) => {
+            // An error happened.
+        });
+    }
+
+    onClickStation = (station) => {
+        console.log(station)
+        this.setState({
+            open: true,
+            checkInStation: station,
+        });
     }
 
     render() {
         return (
             <View>
-                <MenuProvider>
-                    <MapComponent />
-                </MenuProvider>
+                <MapComponent onClickStation={this.onClickStation}/>
                 {!this.state.open
                     && <TouchableOpacity style={styles.menuIcon} onPress={this.onOpenMenu}>
                     <AntDesign name="bars" size={48} color="black" />
@@ -35,7 +52,10 @@ export default class OverlayComponent extends React.Component {
                         <TouchableOpacity style={styles.menuIcon} onPress={this.onOpenMenu}>
                             <AntDesign name="bars" size={48} color="white" />
                         </TouchableOpacity>
-                        <ProfileComponent style={styles.profile}/>
+                        <ProfileComponent style={styles.profile} user={this.props.user}/>
+                        {this.state.checkInStation != null &&
+                            <CheckInComponent checkInStation={this.state.checkInStation}/>
+                        }
                         <TouchableOpacity
                             style={styles.button}
                             onPress={this.onPress}>
