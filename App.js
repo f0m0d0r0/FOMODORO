@@ -1,11 +1,12 @@
 import * as React from 'react';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import HomeComponent from "./components/HomeComponent";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} showsUserLocation={true} provider={PROVIDER_GOOGLE}/>
+      <HomeComponent/>
     </View>
   );
 }
