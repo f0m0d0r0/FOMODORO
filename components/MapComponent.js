@@ -90,7 +90,7 @@ export default function MapComponent(props) {
         longitude: camView.center.longitude,
         }}
         description={"This is a marker in React Native"}>
-        <Image source={require('../assets/spot.png')} style={{height: 35, width:35 }} />
+        <Image source={require('../assets/fil.png')} style={{height: 90, width: 90 }} />
       </Marker>
       <Spots onClickStation={props.onClickStation}/>
   </MapView>

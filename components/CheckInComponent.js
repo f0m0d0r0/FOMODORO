@@ -7,18 +7,36 @@ export default class CheckInComponent extends React.Component {
     }
 
     onPress = () => {
+        this.props.checkIn(this.props.checkInStation.description)
+    }
 
+    onPressCheckout = () => {
+        this.props.checkIn(null)
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>{this.props.checkInStation.description}</Text>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={this.onPress}>
-                    <Text> Check In </Text>
-                </TouchableOpacity>
+                {this.props.userInfo.checkedInStation != null
+                    &&
+                    <View>
+                        <Text style={styles.title}>You are checked in to{this.props.checkInStation.description}</Text>
+                        <TouchableOpacity
+                        style={styles.button}
+                        onPress={this.onPressCheckout}>
+                        <Text> Check Out </Text>
+                        </TouchableOpacity>
+                    </View>}
+                {this.props.userInfo.checkedInStation == null
+                    &&
+                    <View>
+                        <Text style={styles.title}>{this.props.checkInStation.description}</Text>
+                        <TouchableOpacity
+                        style={styles.button}
+                        onPress={this.onPress}>
+                        <Text> Check In </Text>
+                        </TouchableOpacity>
+                    </View>}
             </View>
         )
     }

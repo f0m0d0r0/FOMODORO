@@ -54,7 +54,8 @@ export default class OverlayComponent extends React.Component {
                         </TouchableOpacity>
                         <ProfileComponent style={styles.profile} user={this.props.user}/>
                         {this.state.checkInStation != null &&
-                            <CheckInComponent checkInStation={this.state.checkInStation}/>
+                            <CheckInComponent checkInStation={this.state.checkInStation} userInfo={this.props.user}
+                            checkIn={this.props.checkIn}/>
                         }
                         <TouchableOpacity
                             style={styles.button}

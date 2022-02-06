@@ -5,6 +5,10 @@ import OverlayComponent from "./OverlayComponent";
 import SignUpComponent from "./SignUpComponent";
 import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import app from "../firebaseConfig";
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 export default class HomeComponent extends React.Component {
     constructor(props) {
@@ -12,7 +16,8 @@ export default class HomeComponent extends React.Component {
         this.state = {
             user: {
                 email: null,
-                coins: null,
+                coins: 50,
+                checkedInStation: null
             },
             pageStatus: "start",
             error: "",
@@ -31,7 +36,7 @@ export default class HomeComponent extends React.Component {
 
     setUser = (user) => {
         console.log(JSON.stringify(user));
-        this.setState({user: {email: user.email}});
+        this.setState({user: {...this.state.user, email: user.email}});
         this.setState({pageStatus: "loggedIn"});
     }
 
@@ -53,6 +58,10 @@ export default class HomeComponent extends React.Component {
 
             });
 
+    }
+
+    checkIn = (station) => {
+        this.setState({user: {...this.state.user, checkedInStation: station}})
     }
 
     signUp = (email, password) => {
@@ -90,7 +99,9 @@ export default class HomeComponent extends React.Component {
                     </View>}
                 { this.state.pageStatus == "logIn" && <LoginComponent signIn={this.signIn} changePage={this.changePage}/> }
                 { this.state.pageStatus == "signUp" && <SignUpComponent changePage={this.changePage} signUp={this.signUp}/> }
-                { this.state.pageStatus == "loggedIn" && <OverlayComponent changePage={this.changePage} user={this.state.user}/>}
+                { this.state.pageStatus == "loggedIn" && <OverlayComponent changePage={this.changePage}
+                                                                           user={this.state.user}
+                                                                           checkIn={this.checkIn}/>}
             </View>
         )
     }
